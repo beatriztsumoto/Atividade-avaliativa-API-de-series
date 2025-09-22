@@ -1,5 +1,4 @@
-const series =
-[
+const series = [
     {
       "id": 1,
       "titulo": "Stranger Things",
@@ -110,4 +109,6 @@ const series =
       "anoFim": "Ativo",
       "avaliacao": 8.6
     }
-  ]
+  ];
+
+  export default {series};
