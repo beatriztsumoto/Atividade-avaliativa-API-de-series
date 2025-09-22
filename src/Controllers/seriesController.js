@@ -5,7 +5,7 @@ const getAllSeries = (req, res) => {
     res.status(200).json({
         total: series.length,
         series: series
-    })
+    });
 };
 
 const getSeriesById = (req, res) => {
@@ -22,7 +22,7 @@ const getSeriesById = (req, res) => {
 
     res.status(400).json({
         success: false,
-        message: "Serie não encontrada!"
+        message: "serie nao encontrada"
     })
 };
 
@@ -79,7 +79,72 @@ const deleteSerie =(req, res) => {
     });
 };
 
+const updateSerie = (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const {titulo, genero, canal, temporadas, episodios, anoInicio, anoFim, avaliacao} = req.body;
+
+    if (isNaN(id)) {
+        return res.status(400).json({
+            success: false,
+            message: "O id deve ser um número válido"
+        })
+    }
+
+    const serieExiste = series.find(carta => carta.id === id);
+
+    if (!serieExiste) {
+        return res.status(400).json({
+            success: false,
+            message: "A serie não existe."
+        })
+    }
+
+    if(avaliacao) {
+        if (avaliacao <= 0 || avaliacao >= 11) {
+            return res.status(400).json({
+                success: false,
+                message: "O campo 'avaliação' deve estar entre 0 e 10!"
+            });
+        }
+    }
+
+    if( anoFim ) {
+        if (anoFim < anoInicio) {
+            return res.status(400).json({
+                success: false,
+                message: "o ano de termino deve ser maior que o de inicio!"
+            });
+        }
+    }
+
+    const seriesAtualizadas = series.map(serie => {
+        return serie.id === id
+            ? {
+                ...serie,
+                ...(titulo && { titulo }),
+                ...(genero && { genero }),
+                ...(canal && { canal }),
+                ...(temporadas && { temporadas }),
+                ...(episodios  && { episodios }),
+                ...(anoFim  && { anoFim }),
+                ...(anoInicio && { anoInicio }),
+                ...(avaliacao && { avaliacao })
+            }
+            : serie;
+    });
+    
+    series.splice(0, series.length, ...seriesAtualizadas);
+
+    const serieNova = series.find(serie => serie.id === id);
+
+    res.status(200).json({
+        success: true,
+        message: "Dados atualizados com sucesso",
+        serie: serieNova
+    })
+
+};
 
 
-
-export { getAllSeries, getSeriesById, createSerie };
+export { getAllSeries, getSeriesById, createSerie, deleteSerie,updateSerie };
