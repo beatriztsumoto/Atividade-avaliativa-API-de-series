@@ -19,7 +19,6 @@ const getSeriesById = (req, res) => {
             serie: serie
         })
     }
-
     res.status(400).json({
         success: false,
         message: "serie nao encontrada"

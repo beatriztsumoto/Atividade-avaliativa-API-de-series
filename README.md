@@ -6,9 +6,9 @@ Este projeto é uma **API** desenvolvida para gerenciar informações de séries
 
 ## Tecnologias
 
-* **Node.js**: O ambiente de execução JavaScript no servidor.
-* **Express.js**: Um framework web minimalista e flexível para construir a API.
-* **Nodemon**: Ferramenta para reiniciar o servidor automaticamente durante o desenvolvimento.
+* **Node.js**
+* **Express.js**
+* **Nodemon**
 
 ---
 
