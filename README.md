@@ -41,7 +41,7 @@ Para iniciar a API, execute o seguinte comando no terminal:
 npm run dev
 ```
 
-### Endpoints da API
+### API
 
 A API oferece os seguintes endpoints para realizar operações **CRUD** (Create, Read, Update, Delete) em séries de TV:
 
